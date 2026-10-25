@@ -34,6 +34,19 @@ export const projects: Project[] = [
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Socket.io", "REST APIs", "Tailwind CSS", "MERN Stack"],
     sourceUrl: "https://github.com/ASandaruwan",
     liveUrl: "https://example.com",
+  }, {
+    id: "BatteryVitals",
+    title: "BatteryVitals",
+    description: "A microcontroller-based battery monitoring system designed to evaluate the performance of Li-ion, Li-Po and lead-acid batteries through controlled charging and discharging cycles.",
+    // 1. One image, multiple images, or empty ""
+    image: "https://drive.google.com/file/d/19v6YNCZ2-JgoN7BRP-I8ESxyUzH2rpLq/view?usp=sharing",
+    // or image: ["drive_link_1", "drive_link_2"],
+
+    // 2. Demo Video (Google Drive, YouTube, or Vimeo)
+    //video: "https://drive.google.com/file/d/<VIDEO_ID>/view?usp=sharing",
+
+    tags: ["Arduino", "Li-ion", "Li-Po", "Lead-acid", "Typescript", "Python", "CSS"],
+    sourceUrl: "https://github.com/ASandaruwan/BatteryVitals",
   },
   //   {
   //   id: "my-project",
