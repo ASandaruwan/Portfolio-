@@ -33,7 +33,7 @@ export const projects: Project[] = [
     // video: "https://drive.google.com/file/d/<YOUR_DRIVE_VIDEO_ID>/view?usp=sharing",
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Socket.io", "REST APIs", "Tailwind CSS", "MERN Stack"],
     sourceUrl: "https://github.com/ASandaruwan",
-    liveUrl: "https://example.com",
+    //liveUrl: "https://example.com",
   }, {
     id: "BatteryVitals",
     title: "BatteryVitals",
