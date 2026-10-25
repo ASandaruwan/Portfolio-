@@ -8,7 +8,7 @@ export const siteConfig = {
   tagline: "I build fast, accessible web products end to end.",
   description:
     "Portfolio of Achira Sandaruwan, an aspiring software engineer and University of Moratuwa undergraduate building fast, accessible, full-stack web products with React, Next.js, TypeScript and Node.js.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-beta-virid-61.vercel.app",
   email: "achirasandaruwan123@gmail.com",
   location: "Katubedda, Moratuwa, Sri Lanka",
   resumeUrl: "https://drive.google.com/file/d/1IgGMLRfABsItJ4oUnXW9KfNMGta6c7lS/view?usp=sharing",

@@ -35,17 +35,20 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/ASandaruwan",
     liveUrl: "https://example.com",
   },
-  // Template for future projects with image & video:
-  // {
+  //   {
   //   id: "my-project",
   //   title: "My Project",
   //   description: "...",
-  //   image: "https://drive.google.com/file/d/<IMAGE_ID>/view?usp=sharing",
-  //   // or multiple images: image: ["drive_link_1", "drive_link_2"],
-  //   video: "https://drive.google.com/file/d/<VIDEO_ID>/view?usp=sharing",
-  //   tags: ["React", "TypeScript"],
-  //   sourceUrl: "https://github.com/...",
-  //   liveUrl: "https://...",
-  // },
-];
+  //   // 1. One image, multiple images, or empty ""
+  //   image: "https://drive.google.com/file/d/<IMAGE_ID>/view?usp=sharing", 
+  //   // or image: ["drive_link_1", "drive_link_2"],
 
+  //   // 2. Demo Video (Google Drive, YouTube, or Vimeo)
+  //   video: "https://drive.google.com/file/d/<VIDEO_ID>/view?usp=sharing",
+
+  //   tags: [...],
+  //   sourceUrl: "...",
+  // }
+
+
+];
