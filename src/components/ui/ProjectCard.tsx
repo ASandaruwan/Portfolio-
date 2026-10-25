@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ExternalLink, FolderGit2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, FolderGit2, Play, Image as ImageIcon } from "lucide-react";
 import { useState } from "react";
-import { resolveImageSrcs } from "@/lib/images";
+import { resolveImageSrcs, resolveVideoSrc } from "@/lib/images";
 import type { Project } from "@/types";
 import { GitHubIcon } from "./BrandIcons";
 import { ImagePlaceholder } from "./ImagePlaceholder";
@@ -18,8 +18,10 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const { title, description, sourceUrl } = project;
   const images = resolveImageSrcs(project.image, project.images);
+  const videoSource = resolveVideoSrc(project.video);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedIndices, setFailedIndices] = useState<Set<number>>(new Set());
+  const [showVideo, setShowVideo] = useState(false);
 
   const liveUrl = project.liveUrl?.trim();
   const tags = project.tags.filter((tag) => tag.trim() !== "");
@@ -43,7 +45,24 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/10">
       <div className="relative aspect-video overflow-hidden border-b border-line bg-surface-muted">
-        {!isImageFailed ? (
+        {showVideo && videoSource ? (
+          videoSource.type === "embed" ? (
+            <iframe
+              src={videoSource.src}
+              title={`Demo video for ${title}`}
+              className="size-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          ) : (
+            <video
+              src={videoSource.src}
+              controls
+              playsInline
+              className="size-full object-cover"
+            />
+          )
+        ) : !isImageFailed ? (
           <Image
             key={activeImage}
             src={activeImage}
@@ -60,8 +79,40 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           <ImagePlaceholder icon={FolderGit2} variant={index} />
         )}
 
+        {/* Media mode toggle if video is available */}
+        {videoSource && (
+          <div className="absolute top-3 left-3 z-20 flex items-center rounded-lg border border-white/15 bg-black/60 p-0.5 backdrop-blur-md">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowVideo(false);
+              }}
+              className={`flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition ${
+                !showVideo ? "bg-white/20 text-white" : "text-white/70 hover:text-white"
+              }`}
+            >
+              <ImageIcon className="size-3" />
+              Photos
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowVideo(true);
+              }}
+              className={`flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition ${
+                showVideo ? "bg-white/20 text-white" : "text-white/70 hover:text-white"
+              }`}
+            >
+              <Play className="size-3 fill-current" />
+              Video
+            </button>
+          </div>
+        )}
+
         {/* Carousel controls if there are multiple screenshots */}
-        {hasMultipleImages && (
+        {!showVideo && hasMultipleImages && (
           <>
             {/* Slide counter badge */}
             <div className="absolute top-3 right-3 z-20 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-0.5 font-mono text-[11px] font-medium text-white/95 backdrop-blur-md border border-white/10 shadow-sm pointer-events-none">

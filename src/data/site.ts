@@ -12,8 +12,8 @@ export const siteConfig = {
   email: "achirasandaruwan123@gmail.com",
   location: "Katubedda, Moratuwa, Sri Lanka",
   resumeUrl: "https://drive.google.com/file/d/1IgGMLRfABsItJ4oUnXW9KfNMGta6c7lS/view?usp=sharing",
-  // Swap for a real photo, e.g. "/images/profile.jpg".
-  profileImage: "https://drive.google.com/file/d/1l35EJ6nZ3zw5jHewtIklr6YvtdHwg7A7/view?usp=sharing",
+  // Local photo in public/images/
+  profileImage: "/images/profile.png",
   // TODO: replace with your real profile URLs.
   socials: {
     github: "https://github.com/ASandaruwan",

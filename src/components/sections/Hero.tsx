@@ -75,7 +75,7 @@ export function Hero() {
                 src={profileSrc}
                 alt={`Portrait of ${siteConfig.name}`}
                 fill
-                preload
+                priority
                 sizes="(min-width: 640px) 384px, 90vw"
                 unoptimized={profileSrc.includes("googleusercontent.com") || profileSrc.endsWith(".svg")}
                 className="object-cover"

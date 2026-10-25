@@ -16,6 +16,8 @@ export interface Project {
   image?: string | string[];
   /** Optional additional screenshots for carousel display */
   images?: string[];
+  /** Optional demo video URL (e.g. "/videos/demo.mp4", YouTube, Vimeo, or Google Drive preview link) */
+  video?: string;
   tags: string[];
   /** Repository link for the "View Source" button. */
   sourceUrl: string;
