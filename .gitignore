@@ -40,3 +40,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local media assets (hosted externally on Google Drive)
+/public/images/projects/*
+!/public/images/projects/.gitkeep
+/public/videos/*
+!/public/videos/.gitkeep
+/public/images/profile.png
+/public/images/profile.jpg
+
