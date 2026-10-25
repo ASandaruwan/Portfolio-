@@ -46,3 +46,39 @@ export function resolveImageSrcs(
     .filter((item): item is string => Boolean(item && item.trim() !== ""));
 }
 
+export type VideoSource =
+  | { type: "file"; src: string }
+  | { type: "embed"; src: string };
+
+/**
+ * Parses and normalizes video sources:
+ * - Local files (e.g. "/videos/demo.mp4") or direct video links -> { type: "file", src }
+ * - YouTube, Vimeo, Google Drive video previews -> { type: "embed", src: "<embed-url>" }
+ */
+export function resolveVideoSrc(url: string | undefined): VideoSource | undefined {
+  if (!url) return undefined;
+  const value = url.trim();
+  if (!value) return undefined;
+
+  // YouTube
+  const ytMatch = value.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+  if (ytMatch) {
+    return { type: "embed", src: `https://www.youtube.com/embed/${ytMatch[1]}` };
+  }
+
+  // Google Drive video preview
+  const driveId = value.match(DRIVE_FILE_ID)?.[1];
+  if (driveId) {
+    return { type: "embed", src: `https://drive.google.com/file/d/${driveId}/preview` };
+  }
+
+  // Vimeo
+  const vimeoMatch = value.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vimeoMatch) {
+    return { type: "embed", src: `https://player.vimeo.com/video/${vimeoMatch[1]}` };
+  }
+
+  // Direct video file (e.g. /videos/project.mp4 or direct URL)
+  return { type: "file", src: value };
+}
+

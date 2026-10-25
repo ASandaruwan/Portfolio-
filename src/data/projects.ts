@@ -12,7 +12,7 @@ export const projects: Project[] = [
     title: "Blog App Development Project",
     description:
       "A full-stack blog app with features like posting, commenting, liking and sharing. Implemented using React, Node.js, Express.js, MongoDB, REST APIs, JWT Authentication, and Postman collection.",
-    image: "https://drive.google.com/file/d/1sE4W0c51siQPiTEYIrB9nP9M8Yg10ztu/view?usp=sharing",
+    image: "/images/projects/blogapp.jpg",
     tags: ["Node.js", "React", "MongoDB", "REST APIs", "JWT Authentication"],
     sourceUrl: "https://github.com/ASandaruwan/blogapp-development-project.git",
   },
@@ -22,9 +22,9 @@ export const projects: Project[] = [
     description:
       "A dedicated platform for the UK rental market empowering property owners and tenants to manage bookings, notifications, and real-time communications seamlessly.",
     image: [
-      "https://drive.google.com/file/d/1lQ2iw_kB1lsJb2AOPDh3K0c1CoNgUXyE/view?usp=sharing",
-      "https://drive.google.com/file/d/1wk5ph1GRAbVo1IF8BqfTotcFtgFAZMFZ/view?usp=sharing",
-      "https://drive.google.com/file/d/1mevdAvEquANe4rCW8VZ8flgodikkciOb/view?usp=sharing",
+      "/images/projects/proptech-1.png",
+      "/images/projects/proptech-2.png",
+      "/images/projects/proptech-3.png",
     ],
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Socket.io", "REST APIs", "Tailwind CSS", "MERN Stack"],
     sourceUrl: "https://github.com/ASandaruwan",
