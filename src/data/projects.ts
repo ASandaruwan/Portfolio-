@@ -12,7 +12,10 @@ export const projects: Project[] = [
     title: "Blog App Development Project",
     description:
       "A full-stack blog app with features like posting, commenting, liking and sharing. Implemented using React, Node.js, Express.js, MongoDB, REST APIs, JWT Authentication, and Postman collection.",
-    image: "https://drive.google.com/file/d/1sE4W0c51siQPiTEYIrB9nP9M8Yg10ztu/view?usp=sharing",
+    // Optional screenshot/cover image: Google Drive link or leave "" for video-only
+    image: "",
+    // Google Drive demo video preview link
+    video: "https://drive.google.com/file/d/1sE4W0c51siQPiTEYIrB9nP9M8Yg10ztu/view?usp=sharing",
     tags: ["Node.js", "React", "MongoDB", "REST APIs", "JWT Authentication"],
     sourceUrl: "https://github.com/ASandaruwan/blogapp-development-project.git",
   },
@@ -32,4 +35,17 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/ASandaruwan",
     liveUrl: "https://example.com",
   },
+  // Template for future projects with image & video:
+  // {
+  //   id: "my-project",
+  //   title: "My Project",
+  //   description: "...",
+  //   image: "https://drive.google.com/file/d/<IMAGE_ID>/view?usp=sharing",
+  //   // or multiple images: image: ["drive_link_1", "drive_link_2"],
+  //   video: "https://drive.google.com/file/d/<VIDEO_ID>/view?usp=sharing",
+  //   tags: ["React", "TypeScript"],
+  //   sourceUrl: "https://github.com/...",
+  //   liveUrl: "https://...",
+  // },
 ];
+

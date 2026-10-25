@@ -21,7 +21,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   const videoSource = resolveVideoSrc(project.video);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedIndices, setFailedIndices] = useState<Set<number>>(new Set());
-  const [showVideo, setShowVideo] = useState(false);
+  const [showVideo, setShowVideo] = useState(images.length === 0 && Boolean(videoSource));
 
   const liveUrl = project.liveUrl?.trim();
   const tags = project.tags.filter((tag) => tag.trim() !== "");
@@ -53,6 +53,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               className="size-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              loading="lazy"
             />
           ) : (
             <video
@@ -79,8 +80,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           <ImagePlaceholder icon={FolderGit2} variant={index} />
         )}
 
-        {/* Media mode toggle if video is available */}
-        {videoSource && (
+        {/* Media mode toggle if video is available and there are also images */}
+        {videoSource && images.length > 0 && (
           <div className="absolute top-3 left-3 z-20 flex items-center rounded-lg border border-white/15 bg-black/60 p-0.5 backdrop-blur-md">
             <button
               type="button"
@@ -109,6 +110,38 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               Video
             </button>
           </div>
+        )}
+
+        {/* Watch Demo Video action button when previewing photos */}
+        {!showVideo && videoSource && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowVideo(true);
+            }}
+            className="absolute inset-0 z-10 flex items-center justify-center bg-black/25 opacity-90 transition-all duration-200 hover:bg-black/35 hover:opacity-100 group/play"
+            aria-label={`Play demo video for ${title}`}
+          >
+            <span className="flex items-center gap-2 rounded-full border border-white/25 bg-black/75 px-4 py-2 text-xs font-semibold text-white shadow-xl backdrop-blur-md transition-all duration-200 group-hover/play:scale-105 group-hover/play:bg-accent group-hover/play:border-accent">
+              <Play className="size-3.5 fill-current" />
+              Watch Demo Video
+            </span>
+          </button>
+        )}
+
+        {/* External link to open video in new tab / fullscreen */}
+        {showVideo && videoSource?.externalUrl && (
+          <a
+            href={videoSource.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open video in new tab"
+            className="absolute top-3 right-3 z-20 flex items-center gap-1 rounded-md border border-white/15 bg-black/60 px-2 py-1 text-[11px] font-medium text-white/80 backdrop-blur-md transition hover:bg-black/80 hover:text-white"
+          >
+            <ExternalLink className="size-3" />
+            <span>Open</span>
+          </a>
         )}
 
         {/* Carousel controls if there are multiple screenshots */}

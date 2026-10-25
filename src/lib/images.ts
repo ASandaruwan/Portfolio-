@@ -47,13 +47,13 @@ export function resolveImageSrcs(
 }
 
 export type VideoSource =
-  | { type: "file"; src: string }
-  | { type: "embed"; src: string };
+  | { type: "file"; src: string; externalUrl?: string }
+  | { type: "embed"; src: string; externalUrl?: string };
 
 /**
  * Parses and normalizes video sources:
- * - Local files (e.g. "/videos/demo.mp4") or direct video links -> { type: "file", src }
- * - YouTube, Vimeo, Google Drive video previews -> { type: "embed", src: "<embed-url>" }
+ * - Local files (e.g. "/videos/demo.mp4") or direct video links -> { type: "file", src, externalUrl }
+ * - YouTube, Vimeo, Google Drive video previews -> { type: "embed", src: "<embed-url>", externalUrl }
  */
 export function resolveVideoSrc(url: string | undefined): VideoSource | undefined {
   if (!url) return undefined;
@@ -63,22 +63,34 @@ export function resolveVideoSrc(url: string | undefined): VideoSource | undefine
   // YouTube
   const ytMatch = value.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
   if (ytMatch) {
-    return { type: "embed", src: `https://www.youtube.com/embed/${ytMatch[1]}` };
+    return {
+      type: "embed",
+      src: `https://www.youtube.com/embed/${ytMatch[1]}`,
+      externalUrl: `https://www.youtube.com/watch?v=${ytMatch[1]}`,
+    };
   }
 
   // Google Drive video preview
   const driveId = value.match(DRIVE_FILE_ID)?.[1];
   if (driveId) {
-    return { type: "embed", src: `https://drive.google.com/file/d/${driveId}/preview` };
+    return {
+      type: "embed",
+      src: `https://drive.google.com/file/d/${driveId}/preview`,
+      externalUrl: `https://drive.google.com/file/d/${driveId}/view?usp=sharing`,
+    };
   }
 
   // Vimeo
   const vimeoMatch = value.match(/vimeo\.com\/(?:video\/)?(\d+)/);
   if (vimeoMatch) {
-    return { type: "embed", src: `https://player.vimeo.com/video/${vimeoMatch[1]}` };
+    return {
+      type: "embed",
+      src: `https://player.vimeo.com/video/${vimeoMatch[1]}`,
+      externalUrl: `https://vimeo.com/${vimeoMatch[1]}`,
+    };
   }
 
   // Direct video file (e.g. /videos/project.mp4 or direct URL)
-  return { type: "file", src: value };
+  return { type: "file", src: value, externalUrl: value };
 }
 
